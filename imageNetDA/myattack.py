@@ -4,7 +4,7 @@ import torch.optim as optim
 import torch.nn.functional as F
 
 def pgd_whitebox(model, X, y, random_start=True,
-                      epsilon=8/255, num_steps=10, step_size=0.003):
+                      epsilon=8/255, num_steps=20, step_size=0.003):
         model.eval()
         out = model(X)
         acc = (out.data.max(1)[1] == y.data).float().sum()

@@ -249,10 +249,8 @@ model = model.cuda().eval()
 ## Code for pgd attack
 
 #atk = torchattacks.AutoAttack(model, norm='Linf', eps=8/255, version='standard', n_classes=10, seed=None, verbose=False)
-#atk = torchattacks.FGSM(model, eps=8/255)
-#atk  = torchattacks.CW(model, c=1e-4, kappa=0, steps=10, lr=0.01)
-atk = torchattacks.MIFGSM(model, eps=8/255, steps=20, alpha=0.8/255, decay=10.0)
-#atk = torchattacks.DeepFool(model, steps=10, overshoot=0.8/255)
+#atk  = torchattacks.CW(model, c=1e-4, kappa=0, steps=20, lr=0.01)
+atk = torchattacks.MIFGSM(model, eps=8/255, steps=20, alpha=0.8/255)
 '''
 for i in range(0,10):
     myeps = 0.01 * (i+1)
@@ -268,7 +266,6 @@ for i in range(0,10):
 myeps = 0.01
 print("eps: ",myeps)
 #atk = PGD(model, eps=myeps, alpha=0.8/255, steps=20)
-#atk = PGDL2(model, eps=1.0, alpha=0.2, steps=7)
 atk.set_return_type('int') # Save as integer.
 
 #adv_images, adv_labels = torch.load("/scratch/un270/output/cifar10_pgd.pt")
